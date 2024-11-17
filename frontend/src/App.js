@@ -6,6 +6,8 @@ import Login from './components/Login/login.component';
 import Home from './pages/Home';
 import {BrowserRouter, Routes, Route} from 'react-router-dom';
 import Navbar from './components/Navbar/navbar.component';
+import Mentors from './pages/Mentors/Mentors.jsx';
+import Profile from './pages/Profile/Profile.jsx';
 
 function App() {
 
@@ -17,6 +19,8 @@ function App() {
             <Route exact path='/' element={<Home/>}></Route>
             <Route path='/signup' element={<SignUp/>}/>
             <Route path='/login' element={<Login/>}/>
+            <Route path='/mentors' element={<Mentors/>}/>
+            <Route path='/profile' element={<Profile/>}/>
         </Routes>
       </AuthProvider>
     </BrowserRouter>
