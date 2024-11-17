@@ -1,10 +1,16 @@
 .login-container{
+    position: relative;
     .form-group{
+        position: relative;
         .form-field{
-
+            position: relative;
+            width: 200px;
+            height: 35px;
+            border: 1.5px solid;
+            border-radius: 4px;
         }
         .form-label{
-            
+            position: absolute;
         }
     }
 }

@@ -5,6 +5,7 @@ import java.util.Set;
 
 import org.hibernate.annotations.CreationTimestamp;
 
+import jakarta.persistence.CascadeType;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.FetchType;
@@ -14,6 +15,7 @@ import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.JoinTable;
 import jakarta.persistence.ManyToMany;
+import jakarta.persistence.OneToOne;
 import jakarta.persistence.Table;
 import jakarta.persistence.UniqueConstraint;
 import jakarta.validation.constraints.NotBlank;
@@ -44,10 +46,20 @@ public class User {
     @CreationTimestamp
     private Date createdAt;
 
-    @ManyToMany(fetch=FetchType.LAZY)
+    @ManyToMany(cascade=CascadeType.PERSIST,fetch=FetchType.LAZY)
     @JoinTable(name = "user_roles", joinColumns=@JoinColumn(name = "user_id"), inverseJoinColumns=@JoinColumn(name = "role_id"))
     private Set<Role> roles;
-    
+
+    @OneToOne
+    @JoinColumn(name = "resume_id", referencedColumnName= "id")
+    private Resume resume;
+
+    @Column(name="major1")
+    private EMajor major1;
+
+    @Column(name="major2")
+    private EMajor major2;
+
     public User(){}
 
     public User(String username, String password, String email){
@@ -102,5 +114,29 @@ public class User {
 
     public void setCreatedAt(Date createdAt) {
         this.createdAt = createdAt;
+    }
+
+    public Resume getResume() {
+        return resume;
+    }
+
+    public void setResume(Resume resume) {
+        this.resume = resume;
+    }
+
+    public EMajor getMajor1() {
+        return major1;
+    }
+
+    public void setMajor1(EMajor major1) {
+        this.major1 = major1;
+    }
+
+    public EMajor getMajor2() {
+        return major2;
+    }
+
+    public void setMajor2(EMajor major2) {
+        this.major2 = major2;
     }
 }

@@ -11,9 +11,9 @@ const API_URL = "http://localhost:8080/api/auth";
 const AuthProvider = ({ children }) => {
     const [user, setUser] = useState(null);
 
-    const login = async (username, password) => {
+    const login = async (userData) => {
         try {
-            let response = await axios.post(API_URL, { username, password });
+            let response = await axios.post(API_URL + '/login', userData);
 
             console.log(response.message);
             console.log(response.data);

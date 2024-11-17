@@ -57,6 +57,7 @@ public class AuthController {
         Set<Role> roles = new HashSet<>();
         roles.add(new Role(ERole.ROLE_USER));
         newUser.setRoles(roles);
+        
         return ResponseEntity.ok(userRepository.save(newUser));
     }
 
