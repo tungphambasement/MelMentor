@@ -49,7 +49,7 @@ export default function Mentors() {
         </div>
 
         <div className="grid gap-8 md:grid-cols-1 lg:grid-cols-2">
-          {allProfiles.length > 0 ? (
+          {allProfiles && allProfiles.length > 0 ? (
             allProfiles.map((profile, index) => (
               <div
                 key={index}

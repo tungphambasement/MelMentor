@@ -18,6 +18,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.models.EMajor;
 import com.models.ERole;
 import com.models.Role;
 import com.models.User;
@@ -58,6 +59,9 @@ public class AuthController {
         roles.add(new Role(ERole.ROLE_USER));
         newUser.setRoles(roles);
         
+        newUser.setMajor1(EMajor.NONE);
+        newUser.setMajor2(EMajor.NONE);
+        newUser.setDescription("");
         return ResponseEntity.ok(userRepository.save(newUser));
     }
 

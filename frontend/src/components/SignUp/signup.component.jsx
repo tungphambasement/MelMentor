@@ -21,10 +21,15 @@ export default function SignUp() {
     });
   }
 
+  const origin = window.location.origin;
+  
   // Handle form submission
   function handleSignup(e) {
     e.preventDefault(); // Prevent default form submission behavior
     const res = signup(userData); // Call signup function from context
+    if(res && res.username){
+      window.location.href = origin;
+    }
     setMessage(res.message); // Set the feedback message
   }
 
@@ -65,7 +70,7 @@ export default function SignUp() {
           />
 
           {/* Submit Button */}
-          <button type="submit" className="signup-btn">Sign Up</button>
+          <button type="submit" className="signup-btn" href={origin}>Sign Up</button>
         </form>
 
         {/* Display feedback message */}
