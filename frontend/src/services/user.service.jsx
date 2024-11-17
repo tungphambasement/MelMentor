@@ -1,5 +1,5 @@
 import authHeader from "./auth-header";
-
+import axios from 'axios';
 const API_URL = "http://localhost:8080/api/user";
 
 const getProfile = async(id) => {
@@ -16,7 +16,7 @@ const getProfile = async(id) => {
 
 const getAllProfiles = async() => {
     try{
-        const response = await axios.get(API_URL+"/profile/batch");
+        const response = await axios.get(API_URL+"/profiles");
 
         console.log(response.data);
 
@@ -26,11 +26,11 @@ const getAllProfiles = async() => {
     }
 }
 
-const updateProfile = async() => {
+const updateProfile = async(newData) => {
     try{
-        const response = await axios.put(API_URL+"/profile", authHeader());
-
-        console.log(response.data);
+        console.log(newData);
+        console.log({headers: authHeader()});
+        const response = await axios.put(API_URL+"/profile", newData, {headers: authHeader()});
 
         return response.data;
     }catch(e){

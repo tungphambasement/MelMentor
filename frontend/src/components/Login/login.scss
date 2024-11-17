@@ -1,16 +1,109 @@
-.login-container{
+.login-container {
     position: relative;
-    .form-group{
-        position: relative;
-        .form-field{
-            position: relative;
-            width: 200px;
-            height: 35px;
-            border: 1.5px solid;
-            border-radius: 4px;
+    width: 1000px;
+    margin: auto;
+    text-align: center;
+    align-items: center;
+    flex-direction: row;
+    .form-container {
+        width: 400px;
+        height: 400px;
+        align-items: center;
+        margin: auto;
+        margin-top: 20%;
+        margin-bottom: 0;
+        .login-header{
+            font-size: 36px;
+            margin-bottom: 1em;
         }
-        .form-label{
-            position: absolute;
+        .form-group {
+            position: relative;
+            width: 275px;
+            margin: 0 auto;
+            margin-bottom: 20px;
+            height: 40px;
+
+            input {
+                width: 100%;
+                height: 100%;
+
+                font-size: 16px;
+
+                border: 1.2px solid;
+            }
+
+            .form-label {
+                position: absolute;
+                top: 0.5rem;
+                display: block;
+                left: 10px;
+                transition: 0.2s;
+                font-size: 1rem;
+                color: black;
+                pointer-events: none;
+                font-weight: 400;
+            }
+
+            .form-field {
+                font-family: inherit;
+                border: 1px solid;
+                border-radius: 3px;
+                outline: 0;
+                font-size: 16px;
+                color: black;
+                margin-bottom: 1rem;
+                background: transparent;
+                transition: border-color 0.2s;
+                padding: 10px;
+
+                &::placeholder {
+                    color: transparent;
+                }
+
+                &:not(:placeholder-shown),
+                &:focus {
+                    ~.form-label {
+                        position: absolute;
+                        top: -10px;
+                        background-color: white;
+                        transition: 0.2s;
+                        font-size: .8rem;
+                        border-radius: 2px;
+                        font-weight: 500;
+                    }
+                }
+
+                &:focus {
+                    font-weight: 400;
+                    border-width: 1px;
+                    border-color: black;
+                    border-image-slice: 1;
+                }
+            }
+        }
+
+        .btn-login {
+            padding: 8px 10px;
+            border: 1px solid #28a745;
+            border-radius: 5px;
+            width: 275px;
+            background-color: #2ea74a;
+            color: white;
+            margin-bottom: 15px;
+            &:hover{
+                background-color: #309549;
+            }
+        }
+
+        .message{
+            color: red;
+            margin-bottom: 10px;
+        }
+
+        .sign-up{
+            span{
+                color: #0000EE;
+            }
         }
     }
 }

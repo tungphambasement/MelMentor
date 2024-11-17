@@ -1,15 +1,28 @@
-export default function Home(){
-    return(
-        <div>
-            <div class="container">
-            <div class="row">
-            <img class="header" src="https://www.library.rochester.edu/sites/default/files/images/2019-01-04_Rush_Rhees_Library_0137.jpg" />
-            </div>
-            <div class="row">
-            Hello World
-            </div>
-            </div>
-        </div>
+import React from 'react';
+import './Home.scss'; // For custom styling if needed
+import { HeroSection } from './HeroSection';
+import { HowItWorks } from './HowItWorks';
+import { Testimonials } from './Testimonial';
+import { WhyChooseUs } from './WhyChooseUs';
+import { JoinUs } from './JoinUsSection';
+import { Footer } from './Footer';
+export default function Home() {
+    return (
+        <div className='home-container'>
+            <HeroSection />
 
+            
+            <HowItWorks />
+
+
+            <Testimonials />
+
+            <WhyChooseUs />
+
+            <JoinUs />
+
+        
+            <Footer />
+        </div>
     );
 }

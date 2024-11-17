@@ -1,55 +1,127 @@
-import './navbar.scss'
-export default function Navbar() {
-    return (
-    <div>
-        <nav class="navbar bg-body-tertiary fixed-top">
-                      <div class="container-fluid">
-                        <a class="navbar-brand" href="#" style={{fontFamily : "Times New Roman"}}>
-                        MelMentor
-                        </a>
-                        <button class="navbar-toggler" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasNavbar" aria-controls="offcanvasNavbar" aria-label="Toggle navigation">
-                          <span class="navbar-toggler-icon"></span>
-                        </button>
-                        <div class="offcanvas offcanvas-end" tabindex="-1" id="offcanvasNavbar" aria-labelledby="offcanvasNavbarLabel">
-                          <div class="offcanvas-header">
-                            <h5 class="offcanvas-title" id="offcanvasNavbarLabel">MelMentor</h5>
-                            <button type="button" class="btn-close" data-bs-dismiss="offcanvas" aria-label="Close"></button>
-                          </div>
-                          <div class="offcanvas-body">
-                            <ul class="navbar-nav justify-content-end flex-grow-1 pe-3">
-                              <li class="nav-item">
-                                <a class="nav-link active" aria-current="page" href="#">Home</a>
-                              </li>
-                              <li class="nav-item">
-                                <a class="nav-link" href="#">Profile</a>
-                              </li>
-                            </ul>
-                            <form class="d-flex mt-3" role="search">
-                              <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search"/>
-                              <button class="btn btn-outline-success" type="submit">Search</button>
-                            </form>
-{/*                             <div class="group"> */}
-{/*                                         <svg viewBox="0 0 24 24" aria-hidden="true" class="search-icon"> */}
-{/*                                             <g> */}
-{/*                                                 <path */}
-{/*                                                     d="M21.53 20.47l-3.66-3.66C19.195 15.24 20 13.214 20 11c0-4.97-4.03-9-9-9s-9 4.03-9 9 4.03 9 9 9c2.215 0 4.24-.804 5.808-2.13l3.66 3.66c.147.146.34.22.53.22s.385-.073.53-.22c.295-.293.295-.767.002-1.06zM3.5 11c0-4.135 3.365-7.5 7.5-7.5s7.5 3.365 7.5 7.5-3.365 7.5-7.5 7.5-7.5-3.365-7.5-7.5z" */}
-{/*                                                 ></path> */}
-{/*                                             </g> */}
-{/*                                         </svg> */}
+import { useContext, useEffect, useState } from 'react';
+import { Search, Menu, X } from 'lucide-react';
+import { AuthContext } from '../../services/auth.service';
 
-{/*                                         <input */}
-{/*                                             id="query" */}
-{/*                                             class="input" */}
-{/*                                             type="search" */}
-{/*                                             placeholder="Search..." */}
-{/*                                             name="searchbar" */}
-{/*                                         /> */}
-{/*                                     </div> */}
-                          </div>
-                        </div>
-                      </div>
-                    </nav>
+const Navbar = () => {
+  const { user, logout } = useContext(AuthContext);
+  const currentUrl = window.location.origin;
+  const [profileId, setProfileId] = useState();
+  const [isOpen, setIsOpen] = useState(false);
 
+  const handleLogOut = () => {
+    logout();
+    setIsOpen(false);
+  };
+
+  useEffect(() => {
+    if (!user) return;
+    setProfileId(user.id);
+  }, [user]);
+
+  return (
+    <nav className="bg-gradient-to-r from-gray-900 to-gray-800 shadow-xl fixed w-full top-0 z-50">
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div className="flex items-center justify-between h-16">
+          {/* Logo */}
+          <a href={currentUrl} className="flex items-center no-underline">
+            <span className="text-gray-100 text-xl font-bold hover:text-white transition-colors">MelMentor</span>
+          </a>
+
+          {/* Search Bar */}
+          <div className="hidden md:block flex-1 max-w-2xl mx-8">
+            <div className="relative">
+              <input
+                type="text"
+                className="w-full bg-gray-800/50 text-gray-100 placeholder-gray-400 rounded-lg pl-4 pr-10 py-2 focus:outline-none focus:ring-2 focus:ring-gray-700 focus:bg-gray-800 transition-all"
+                placeholder="Search..."
+              />
+              <button className="absolute right-3 top-1/2 -translate-y-1/2">
+                <Search className="h-5 w-5 text-gray-400" />
+              </button>
+            </div>
+          </div>
+
+          {/* Desktop Navigation */}
+          <div className="hidden md:flex items-center space-x-4">
+            <a href="/" className="text-gray-300 hover:text-white px-3 py-2 rounded-md text-sm font-medium transition-colors hover:bg-gray-800 no-underline">
+              Home
+            </a>
+            <a href="/mentors" className="text-gray-300 hover:text-white px-3 py-2 rounded-md text-sm font-medium transition-colors hover:bg-gray-800 no-underline">
+              Mentors
+            </a>
+            {user ? (
+              <>
+                <a href={`/profile/${profileId}`} className="text-gray-300 hover:text-white px-3 py-2 rounded-md text-sm font-medium transition-colors hover:bg-gray-800 no-underline">
+                  Profile
+                </a>
+                <button
+                  onClick={handleLogOut}
+                  className="bg-red-600 hover:bg-red-700 text-white px-4 py-2 rounded-md text-sm font-medium transition-colors no-underline"
+                >
+                  Logout
+                </button>
+              </>
+            ) : (
+              <>
+                <a href="/login" className="text-gray-300 hover:text-white px-3 py-2 rounded-md text-sm font-medium transition-colors hover:bg-gray-800 no-underline">
+                  Login
+                </a>
+                <a href="/signup" className="bg-gray-100 hover:bg-white text-gray-900 px-4 py-2 rounded-md text-sm font-medium transition-colors no-underline">
+                  Sign Up
+                </a>
+              </>
+            )}
+          </div>
+
+          {/* Mobile menu button */}
+          <div className="md:hidden">
+            <button
+              onClick={() => setIsOpen(!isOpen)}
+              className="text-gray-400 hover:text-white p-2 transition-colors"
+            >
+              {isOpen ? <X className="h-6 w-6" /> : <Menu className="h-6 w-6" />}
+            </button>
+          </div>
         </div>
-    );
-}
+      </div>
+
+      {/* Mobile menu */}
+      {isOpen && (
+        <div className="md:hidden bg-gray-800">
+          <div className="px-2 pt-2 pb-3 space-y-1">
+            <a href="/" className="text-gray-300 hover:text-white hover:bg-gray-700 block px-3 py-2 rounded-md text-base font-medium transition-colors no-underline">
+              Home
+            </a>
+            <a href="/mentors" className="text-gray-300 hover:text-white hover:bg-gray-700 block px-3 py-2 rounded-md text-base font-medium transition-colors no-underline">
+              Mentors
+            </a>
+            {user ? (
+              <>
+                <a href={`/profile/${profileId}`} className="text-gray-300 hover:text-white hover:bg-gray-700 block px-3 py-2 rounded-md text-base font-medium transition-colors no-underline">
+                  Profile
+                </a>
+                <button
+                  onClick={handleLogOut}
+                  className="text-gray-300 hover:text-white hover:bg-gray-700 block px-3 py-2 rounded-md text-base font-medium w-full text-left transition-colors no-underline"
+                >
+                  Logout
+                </button>
+              </>
+            ) : (
+              <>
+                <a href="/login" className="text-gray-300 hover:text-white hover:bg-gray-700 block px-3 py-2 rounded-md text-base font-medium transition-colors no-underline">
+                  Login
+                </a>
+                <a href="/signup" className="text-gray-300 hover:text-white hover:bg-gray-700 block px-3 py-2 rounded-md text-base font-medium transition-colors no-underline">
+                  Sign Up
+                </a>
+              </>
+            )}
+          </div>
+        </div>
+      )}
+    </nav>
+  );
+};
+
+export default Navbar;

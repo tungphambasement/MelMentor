@@ -92,6 +92,10 @@ public enum EMajor {
     SPANISH,
     STATISTICS,
     STUDIO_ARTS,
-    THEORY
+    THEORY;
 
+    public static EMajor getEMajor(String str){
+        if(str.equals("")) return EMajor.NONE;
+        return EMajor.valueOf(str.toUpperCase().replaceAll(" ","_"));
+    }
 }

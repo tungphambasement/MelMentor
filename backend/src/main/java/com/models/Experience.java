@@ -15,22 +15,22 @@ public class Experience {
     private Long id;
 
     @NotBlank
-    private String organizationName;
+    private String organization;
 
     @NotBlank
     private String position;
 
     @NotBlank
-    private String briefExperience;
+    private String description;
      
     public Experience(){
 
     }
     
-    public Experience(@NotBlank String organizationName, @NotBlank String position, @NotBlank String briefExperience) {
-        this.organizationName = organizationName;
+    public Experience(@NotBlank String organization, @NotBlank String position, @NotBlank String description) {
+        this.organization = organization;
         this.position = position;
-        this.briefExperience = briefExperience;
+        this.description = description;
     }
 
     public Long getId() {
@@ -41,12 +41,12 @@ public class Experience {
         this.id = id;
     }
 
-    public String getOrganizationName() {
-        return organizationName;
+    public String getOrganization() {
+        return organization;
     }
 
-    public void setOrganizationName(String organizationName) {
-        this.organizationName = organizationName;
+    public void setOrganizationName(String organization) {
+        this.organization = organization;
     }
 
     public String getPosition() {
@@ -57,12 +57,12 @@ public class Experience {
         this.position = position;
     }
 
-    public String getBriefExperience() {
-        return briefExperience;
+    public String getDescription() {
+        return description;
     }
 
-    public void setBriefExperience(String briefExperience) {
-        this.briefExperience = briefExperience;
+    public void setDescription(String description) {
+        this.description = description;
     }
 
     

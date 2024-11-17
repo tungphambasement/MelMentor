@@ -8,7 +8,7 @@ import org.hibernate.annotations.CreationTimestamp;
 import jakarta.persistence.CascadeType;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
-import jakarta.persistence.FetchType;
+import jakarta.persistence.Enumerated;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
@@ -46,7 +46,7 @@ public class User {
     @CreationTimestamp
     private Date createdAt;
 
-    @ManyToMany(cascade=CascadeType.PERSIST,fetch=FetchType.LAZY)
+    @ManyToMany(cascade=CascadeType.ALL)
     @JoinTable(name = "user_roles", joinColumns=@JoinColumn(name = "user_id"), inverseJoinColumns=@JoinColumn(name = "role_id"))
     private Set<Role> roles;
 
@@ -54,10 +54,12 @@ public class User {
     @JoinColumn(name = "resume_id", referencedColumnName= "id")
     private Resume resume;
 
-    @Column(name="major1")
+    private String description;
+    
+    @Enumerated
     private EMajor major1;
 
-    @Column(name="major2")
+    @Enumerated
     private EMajor major2;
 
     public User(){}
@@ -138,5 +140,13 @@ public class User {
 
     public void setMajor2(EMajor major2) {
         this.major2 = major2;
+    }
+
+    public String getDescription() {
+        return description;
+    }
+
+    public void setDescription(String description) {
+        this.description = description;
     }
 }

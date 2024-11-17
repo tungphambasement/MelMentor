@@ -20,7 +20,7 @@ public class Resume {
     @GeneratedValue(strategy=GenerationType.IDENTITY)
     private Long id;
 
-    @OneToOne(mappedBy="resume", fetch=FetchType.LAZY)
+    @OneToOne(mappedBy="resume")
     private User user;
 
     @OneToMany(cascade=CascadeType.ALL, fetch=FetchType.EAGER)

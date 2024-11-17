@@ -2,7 +2,6 @@ package com.payload;
 
 import java.util.List;
 
-import com.models.EMajor;
 import com.models.Experience;
 import com.models.Image;
 
@@ -16,12 +15,12 @@ public class ProfileUpdateDTO {
     
     private List<Experience> experiences;  
     
-    private EMajor major1;
+    private String major1;
 
-    private EMajor major2;
+    private String major2;
 
     public ProfileUpdateDTO(List<Image> selfImages, Integer seniority, String description, List<Experience> experiences,
-            EMajor major1, EMajor major2) {
+            String major1, String major2) {
         this.selfImages = selfImages;
         this.seniority = seniority;
         this.description = description;
@@ -62,19 +61,19 @@ public class ProfileUpdateDTO {
         this.experiences = experiences;
     }
 
-    public EMajor getMajor1() {
+    public String getMajor1() {
         return major1;
     }
 
-    public void setMajor1(EMajor major1) {
+    public void setMajor1(String major1) {
         this.major1 = major1;
     }
 
-    public EMajor getMajor2() {
+    public String getMajor2() {
         return major2;
     }
 
-    public void setMajor2(EMajor major2) {
+    public void setMajor2(String major2) {
         this.major2 = major2;
     }
 }
