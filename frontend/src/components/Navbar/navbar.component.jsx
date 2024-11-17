@@ -1,4 +1,4 @@
-
+import './navbar.scss'
 export default function Navbar() {
     return (
         /* From Uiverse.io by LightAndy1 */

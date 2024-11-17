@@ -1,16 +1,15 @@
 import { useContext, useState } from "react"
-import { AuthContext } from "../../services/auth.service"
-import './login.scss'
-export default function Login() {
-    const { login } = useContext(AuthContext);
+
+export default function Profile(){
+    const [requiredDetails, setRequiredDetails] = useState(["selfImages", "seniority", "description", "experiences", "major1", "major2"]);
+
     const [userData, setUserData] = useState({
         username: "",
         password: "",
         email: "",
     })
-    const [message, setMessage] = useState("");
 
-    const [requiredDetails, setRequiredDetails] = useState(["username", "password"]);
+    const [message, setMessage] = useState("");
 
     function handleDetailChange(e) {
         setUserData((prev) => {
@@ -21,13 +20,13 @@ export default function Login() {
         })
     }
 
-    function handleLogin() {
+    function handleSubmit() {
         const res = login(userData);
         setMessage(res.message);
     }
 
     return (
-        <div className="login-container">
+        <div className="profile-container">
             {requiredDetails && requiredDetails.map(detail => {
                 return (
                     <div className="form-group">
@@ -44,10 +43,10 @@ export default function Login() {
                 );
             })}
             <button
-                onClick={handleLogin}>
-                Login
+                onClick={handleSubmit}>
+                Apply Changes
             </button>
             <div>{message}</div>
         </div>
-    )
+    );
 }
